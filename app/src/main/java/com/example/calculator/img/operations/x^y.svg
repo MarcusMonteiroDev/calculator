@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="x^y.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.74208053"
+     inkscape:cx="396.8572"
+     inkscape:cy="346.99738"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="0"
+     inkscape:window-y="35"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="text644" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       aria-label="tan⁻¹"
+       id="text644"
+       style="font-weight:bold;font-size:52.9167px;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;stroke-width:0.264583">
+      <g
+         aria-label="x^y"
+         id="text786"
+         style="stroke-width:0.0700042">
+        <path
+           d="M 32.173325,65.616666 22.859986,51.487907 h 8.942922 l 5.60917,9.207506 5.662087,-9.207506 h 8.942922 l -9.419172,14.128759 9.842506,14.763758 h -8.942922 l -6.085421,-9.895422 -6.08542,9.895422 h -8.942922 z"
+           id="path788" />
+        <path
+           d="M 53.922041,66.939583 65.246214,42.386235 h 3.704169 L 81.756224,66.939583 H 75.56497 L 67.257049,50.32374 60.007461,66.939583 Z"
+           id="path790" />
+        <path
+           d="m 82.973332,51.487907 h 8.625422 l 5.45042,16.245427 q 0.423333,1.164167 0.635,2.434168 0.211667,1.217084 0.3175,2.592918 h 0.15875 q 0.158751,-1.375834 0.423334,-2.592918 0.3175,-1.270001 0.687917,-2.434168 l 5.344585,-16.245427 h 8.46667 l -12.22375,32.596686 q -1.640422,4.49792 -4.815423,6.720421 -3.122086,2.275418 -7.249588,2.275418 -1.322918,0 -2.328335,-0.15875 -0.9525,-0.105833 -1.693334,-0.264583 v -6.244171 q 0.582083,0.105834 1.375834,0.211667 0.846667,0.105833 1.746251,0.105833 2.487085,0 3.915836,-1.534584 1.481667,-1.481667 2.169584,-3.598335 l 0.476251,-1.428751 z"
+           id="path792" />
+      </g>
+    </g>
+  </g>
+</svg>

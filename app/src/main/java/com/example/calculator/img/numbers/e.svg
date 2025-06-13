@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="e.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.74208053"
+     inkscape:cx="396.8572"
+     inkscape:cy="346.99738"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="0"
+     inkscape:window-y="35"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="text644" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       aria-label="tan⁻¹"
+       id="text644"
+       style="font-weight:bold;font-size:52.9167px;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;stroke-width:0.264583">
+      <g
+         aria-label="e"
+         id="text756"
+         style="stroke-width:0.0700042">
+        <path
+           d="m 68.07729,52.757904 q 5.979587,0 9.472089,3.439585 3.492503,3.386669 3.492503,9.683756 v 3.810002 H 62.415204 q 0.105833,3.333752 1.957918,5.238754 1.905001,1.905001 5.238753,1.905001 2.804585,0 5.080003,-0.529167 2.275418,-0.582084 4.709586,-1.746251 v 6.08542 q -2.116668,1.058334 -4.49792,1.534584 -2.328334,0.529167 -5.662086,0.529167 -4.33917,0 -7.672922,-1.587501 -3.333752,-1.640417 -5.238753,-4.921253 -1.905001,-3.280835 -1.905001,-8.255005 0,-5.080003 1.693335,-8.413755 1.746251,-3.386668 4.815419,-5.080003 3.069169,-1.693334 7.143754,-1.693334 z m 0.05292,5.60917 q -2.275418,0 -3.810002,1.481668 -1.481668,1.481667 -1.746251,4.603752 h 11.05959 q -0.05292,-2.645835 -1.375834,-4.339169 -1.322918,-1.746251 -4.127503,-1.746251 z"
+           id="path758" />
+      </g>
+    </g>
+  </g>
+</svg>
