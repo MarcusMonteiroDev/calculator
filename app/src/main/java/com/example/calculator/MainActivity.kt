@@ -205,7 +205,7 @@ fun Display (modifier: Modifier = Modifier) {
                 .weight(0.85f)
                 //.border (3.dp, Color.Green)
                 .fillMaxSize()
-        ) {
+        ) { //TEST
             calculatorLayout.forEach { rowOfButtons ->
                 Row(modifier = Modifier.weight(1f)) {
                     rowOfButtons.forEach { buttonData ->
