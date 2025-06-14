@@ -83,21 +83,15 @@ fun Btn(
     contentDescription: String? = null,
     onClick: () -> Unit
 ) {
-    // Cor do botão
-    val color = MaterialTheme.colorScheme.primary
+
 
     // Essa Row vai funcionar como a parte clicável do botão, servindo apenas para a estilização
     // O Button em si não é estilizado pois não fornece amplas opções de estilização
     Box (
         modifier = modifier
-        /*modifier = Modifier
-            .clickable {onClick()}
-            .shadow(elevation = 5.dp, shape = RoundedCornerShape(15.dp))
-            .clip(RoundedCornerShape(8.dp))
-            .background(color)
-            //.padding (horizontal = 1.dp, vertical = 1.dp)
-            //.border(width = (2.dp), color = Color.Red)
-        */
+            .clickable (onClick = onClick)
+            .padding(8.dp),
+        contentAlignment = Alignment.Center
     ) {
         Icon (painter = symbol,
             contentDescription = contentDescription,
