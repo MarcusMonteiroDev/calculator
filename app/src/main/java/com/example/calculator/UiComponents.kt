@@ -81,6 +81,7 @@ fun Btn(
     modifier: Modifier = Modifier,
     symbol: Painter,
     contentDescription: String? = null,
+    categoryButton: Color,
     onClick: () -> Unit
 ) {
 
@@ -90,7 +91,8 @@ fun Btn(
     Box (
         modifier = modifier
             .clickable (onClick = onClick)
-            .padding(8.dp),
+            .padding(8.dp)
+            .background(categoryButton),
         contentAlignment = Alignment.Center
     ) {
         Icon (painter = symbol,
@@ -99,10 +101,10 @@ fun Btn(
     }
 }
 
-@Preview (showBackground = true)
+/*@Preview (showBackground = true)
 @Composable
 fun UiPreview () {
     Column (modifier = Modifier.fillMaxSize()) {
         Btn (symbol = painterResource(R.drawable.one), onClick = {/*todo*/})
     }
-}
+}*/

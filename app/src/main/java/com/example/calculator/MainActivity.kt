@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.calculator.ui.theme.CalculatorTheme
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -38,6 +37,11 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.calculator.ui.theme.Dark_Button_Number
+import com.example.calculator.ui.theme.Light_Background
+import com.example.calculator.ui.theme.Light_Button_Clear
+import com.example.calculator.ui.theme.Light_Button_Number
+import com.example.calculator.ui.theme.Light_Display
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,16 +67,34 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-data class CalculatorButton (
+/*
+PLANO
+1 - Separar a construção do layout para que ele seja montado automaticamente da seguinte forma:
+    - Criar um modifier padrão a ser adotado em todos os botões;
+    - Criar uma lista de botões que será iterada para que cada linha se desenhe na tela
+        - Para isso funcionar deve-se fazer uma lista maior que irá representar cada linha e, dentro
+        dessa lista maior, várias listas menores que representam os botões daquela linha
+        - O layout será desenhado iterando sobre a lista principal (responsável pela formação das
+        linhas) e sobre a lista menor (responsável pela geração dos botões individuais).
+2 - Adicionar a lógica aritimética para cada botão:
+    - Cada botão deverá ser caáz de receber uma função que será usada para manipular a lógica
+    do cálculo (usar funções de ordem superior (HOF))
+*/
+
+enum class ButtonCategory {
+    NUMBER, OPERATOR, CLEAR, EQUALS
+}
+
+data class ButtonMold (
     val symbolId: Int,
-    val description: String,
+    val contentDescription: String,
+    val type: ButtonCategory,
     val onClickAction: (String) -> String
 )
 
 @Composable
 fun Display (modifier: Modifier = Modifier) {
     // Cor do botão
-    val color = MaterialTheme.colorScheme.secondary
     // Armazena a expressão matemática digitada
     var expression by remember { mutableStateOf("") }
     // Controla o estado de rolagem do display de texto
@@ -82,110 +104,101 @@ fun Display (modifier: Modifier = Modifier) {
         scrollState.animateScrollTo (scrollState.maxValue)
     }
 
-// Modifier padrão dos botões
+    // Modifier padrão dos botões
     val baseButtonModifier: Modifier = Modifier
-        .fillMaxHeight() // <-- ESSA LINHA É IMPORTANTE para que o botão ocupe toda a altura da Row.
-        .padding(4.dp) // Adicionar um pequeno espaçamento entre os botões fica ótimo
-        .shadow(elevation = 5.dp, shape = RoundedCornerShape(15.dp))
+        .fillMaxSize()
+        .padding(2.dp) // Adicionar um pequeno espaçamento entre os botões fica ótimo
+        //.shadow(elevation = 5.dp, shape = RoundedCornerShape(15.dp))
         .clip(RoundedCornerShape(8.dp))
-        .background(color)
 
-    val calculatorLayout = listOf(
-        // Linha 1
-        listOf(
-            CalculatorButton(R.drawable.sin, "Seno") { it + "sin(" },
-            CalculatorButton(R.drawable.cos, "Cosseno") { it + "cos(" },
-            CalculatorButton(R.drawable.tan, "Tangente") { it + "tan(" },
-            CalculatorButton(R.drawable.test, "Não implementado") { it }, // Botão sem ação
-            CalculatorButton(R.drawable.test, "Não implementado") { it }  // Botão sem ação
+    // Lista de botões
+    val buttons = listOf (
+        listOf (
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ),
+        listOf (
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ),
+        listOf (
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
         ),
-        // Linha 2
-        listOf(
-            CalculatorButton(R.drawable.sin_1, "Arco Seno") { it + "asin(" },
-            CalculatorButton(R.drawable.cos_1, "Arco Cosseno") { it + "acos(" },
-            CalculatorButton(R.drawable.tan_1, "Arco Tangente") { it + "atan(" },
-            CalculatorButton(R.drawable.pi, "Pi") { it + "π" },
-            CalculatorButton(R.drawable.e, "Número de Euler") { it + "e" }
+        listOf (
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
         ),
-        // Linha 3
-        listOf(
-            CalculatorButton(R.drawable.sinh, "Seno Hiperbólico") { it + "sinh(" },
-            CalculatorButton(R.drawable.cosh, "Cosseno Hiperbólico") { it + "cosh(" },
-            CalculatorButton(R.drawable.tanh, "Tangente Hiperbólica") { it + "tanh(" },
-            CalculatorButton(R.drawable.log, "Logaritmo base 10") { it + "log(" },
-            CalculatorButton(R.drawable.ln, "Logaritmo Natural") { it + "ln(" }
+        listOf (
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
         ),
-        // Linha 4
-        listOf(
-            CalculatorButton(R.drawable.asinh, "Arco Seno Hiperbólico") { it + "asinh(" },
-            CalculatorButton(R.drawable.acosh, "Arco Cosseno Hiperbólico") { it + "acosh(" },
-            CalculatorButton(R.drawable.atanh, "Arco Tangente Hiperbólica") { it + "atanh(" },
-            CalculatorButton(R.drawable.div_x, "Inverso de x") { it + "1/" },
-            CalculatorButton(R.drawable.percentage, "Porcentagem") { it + "%" }
+        listOf (
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
         ),
-        // Linha 5
-        listOf(
-            CalculatorButton(R.drawable.y_sqrt_x_, "Raiz y de x") { it + "^(1/" },
-            CalculatorButton(R.drawable.three__sqrt_x_, "Raiz Cúbica") { it + "^(1/3)" },
-            CalculatorButton(R.drawable.sqrt_x_, "Raiz Quadrada") { it + "sqrt(" },
-            CalculatorButton(R.drawable.ten_x, "Dez elevado a x") { it + "10^" },
-            CalculatorButton(R.drawable.n_fatorial, "Fatorial") { it + "!" }
+        listOf (
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
         ),
-        // Linha 6
-        listOf(
-            CalculatorButton(R.drawable.e_x, "e elevado a x") { it + "e^" },
-            CalculatorButton(R.drawable.x_3, "x ao cubo") { it + "^3" },
-            CalculatorButton(R.drawable.x_2, "x ao quadrado") { it + "^2" },
-            CalculatorButton(R.drawable.x_y, "x elevado a y") { it + "^" },
-            CalculatorButton(R.drawable.test, "Não implementado") { it } // Botão sem ação
+        listOf (
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
         ),
-        // Linha 7
-        listOf(
-            CalculatorButton(R.drawable.seven, "7") { it + "7" },
-            CalculatorButton(R.drawable.eight, "8") { it + "8" },
-            CalculatorButton(R.drawable.nine, "9") { it + "9" },
-            CalculatorButton(R.drawable.plus, "Adicionar") { it + "+" },
-            CalculatorButton(R.drawable.back, "Apagar") { it.dropLast(1) } // Ação de apagar o último caractere
+        listOf (
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
         ),
-        // Linha 8
-        listOf(
-            CalculatorButton(R.drawable.four, "4") { it + "4" },
-            CalculatorButton(R.drawable.five, "5") { it + "5" },
-            CalculatorButton(R.drawable.six, "6") { it + "6" },
-            CalculatorButton(R.drawable.minus, "Subtrair") { it + "-" },
-            CalculatorButton(R.drawable.ans, "Resposta anterior") { it + "Ans" } // Assumindo que "Ans" será uma variável
-        ),
-        // Linha 9
-        listOf(
-            CalculatorButton(R.drawable.one, "1") { it + "1" },
-            CalculatorButton(R.drawable.two, "2") { it + "2" },
-            CalculatorButton(R.drawable.three, "3") { it + "3" },
-            CalculatorButton(R.drawable.multiply, "Multiplicar") { it + "*" },
-            CalculatorButton(R.drawable.m_plus, "Memória Adicionar") { it } // Ação de memória não implementada
-        ),
-        // Linha 10
-        listOf(
-            CalculatorButton(R.drawable.clear, "Limpar tudo") { "" }, // Retorna uma string vazia para limpar
-            CalculatorButton(R.drawable.zero, "0") { it + "0" },
-            CalculatorButton(R.drawable.equal, "Igual") { exp -> Calculate(exp) }, // Chama sua função de cálculo
-            CalculatorButton(R.drawable.divide, "Dividir") { it + "/" },
-            CalculatorButton(R.drawable.m_minus, "Memória Subtrair") { it } // Ação de memória não implementada
+        listOf (
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
         )
     )
+
 
     // Coluna principal de sustentaçao da UI
     Column  (modifier = Modifier
         .fillMaxSize()
+        .background(Light_Background)
     ) {
 
         // Tela onde aparece os números da calculadora
         Box(
             modifier = Modifier
-                .weight(0.15f)
-                .border(3.dp, Color.Red)
+                .weight(0.2f)
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp)
-                .background(MaterialTheme.colorScheme.secondary),
+                .background(Light_Display),
             contentAlignment = Alignment.BottomEnd
         ) {
             Text(
@@ -197,33 +210,34 @@ fun Display (modifier: Modifier = Modifier) {
             )
         }
 
-
         Spacer(modifier = Modifier.height(8.dp))
 
+        // Desenho dos botões
         Column (
             modifier = Modifier
-                .weight(0.85f)
-                //.border (3.dp, Color.Green)
+                .weight(1.0f)
                 .fillMaxSize()
-        ) { //TEST
-            calculatorLayout.forEach { rowOfButtons ->
-                Row(modifier = Modifier.weight(1f)) {
-                    rowOfButtons.forEach { buttonData ->
+                .border(2.dp, Color.Red)
+        ) {
+            buttons.forEach { row ->
+                Row(
+                    modifier = Modifier
+                        .weight(1.0f)
+                ) {
+                    row.forEach { element ->
+
                         Btn(
-                            modifier = baseButtonModifier.weight(1f), // O modifier que criamos no Passo 1
-                            symbol = painterResource(id = buttonData.symbolId),
-                            contentDescription = buttonData.description,
-                            onClick = {
-                                expression = buttonData.onClickAction(expression)
-                            }
-                        )
+                            modifier = baseButtonModifier
+                                .weight(0.1f),
+                            symbol = painterResource(element.symbolId),
+                            categoryButton = Color.Red,
+                            onClick = { expression = element.onClickAction(expression) })
                     }
                 }
             }
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
