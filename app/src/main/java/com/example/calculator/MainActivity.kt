@@ -16,6 +16,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,9 +24,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,7 +42,9 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.calculator.ui.theme.Dark_Background
 import com.example.calculator.ui.theme.Dark_Button_Number
+import com.example.calculator.ui.theme.Dark_Display
 import com.example.calculator.ui.theme.Light_Background
 import com.example.calculator.ui.theme.Light_Button_Clear
 import com.example.calculator.ui.theme.Light_Button_Number
@@ -50,7 +57,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CalculatorTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Display (
+                    Display(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -58,6 +65,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -67,20 +75,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-/*
-PLANO
-1 - Separar a construção do layout para que ele seja montado automaticamente da seguinte forma:
-    - Criar um modifier padrão a ser adotado em todos os botões;
-    - Criar uma lista de botões que será iterada para que cada linha se desenhe na tela
-        - Para isso funcionar deve-se fazer uma lista maior que irá representar cada linha e, dentro
-        dessa lista maior, várias listas menores que representam os botões daquela linha
-        - O layout será desenhado iterando sobre a lista principal (responsável pela formação das
-        linhas) e sobre a lista menor (responsável pela geração dos botões individuais).
-2 - Adicionar a lógica aritimética para cada botão:
-    - Cada botão deverá ser caáz de receber uma função que será usada para manipular a lógica
-    do cálculo (usar funções de ordem superior (HOF))
-*/
-
 enum class ButtonCategory {
     NUMBER, OPERATOR, CLEAR, EQUALS
 }
@@ -88,7 +82,7 @@ enum class ButtonCategory {
 data class ButtonMold (
     val symbolId: Int,
     val contentDescription: String,
-    val type: ButtonCategory,
+    val categoryButton: ButtonCategory,
     val onClickAction: (String) -> String
 )
 
@@ -104,12 +98,18 @@ fun Display (modifier: Modifier = Modifier) {
         scrollState.animateScrollTo (scrollState.maxValue)
     }
 
+    // Verifica se o sistema está no modo escuro
+    val isDarkTheme = isSystemInDarkTheme()
+
+    // Define a cor do display e do background
+    val displayColor = if (isDarkTheme) Dark_Display else Light_Display
+    val backgroundColor = if (isDarkTheme) Dark_Background else Light_Background
+
     // Modifier padrão dos botões
     val baseButtonModifier: Modifier = Modifier
         .fillMaxSize()
-        .padding(2.dp) // Adicionar um pequeno espaçamento entre os botões fica ótimo
-        //.shadow(elevation = 5.dp, shape = RoundedCornerShape(15.dp))
-        .clip(RoundedCornerShape(8.dp))
+        .padding(2.dp)
+        .clip(RoundedCornerShape(12.dp))
 
     // Lista de botões
     val buttons = listOf (
@@ -189,16 +189,18 @@ fun Display (modifier: Modifier = Modifier) {
     // Coluna principal de sustentaçao da UI
     Column  (modifier = Modifier
         .fillMaxSize()
-        .background(Light_Background)
+        .imePadding()
+        .background(backgroundColor)
     ) {
-
+        Spacer(modifier = Modifier.height(50.dp))
         // Tela onde aparece os números da calculadora
         Box(
             modifier = Modifier
+                .border(5.dp, Color.Red)
                 .weight(0.2f)
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp)
-                .background(Light_Display),
+                .background(backgroundColor),
             contentAlignment = Alignment.BottomEnd
         ) {
             Text(
@@ -217,7 +219,6 @@ fun Display (modifier: Modifier = Modifier) {
             modifier = Modifier
                 .weight(1.0f)
                 .fillMaxSize()
-                .border(2.dp, Color.Red)
         ) {
             buttons.forEach { row ->
                 Row(
@@ -230,16 +231,17 @@ fun Display (modifier: Modifier = Modifier) {
                             modifier = baseButtonModifier
                                 .weight(0.1f),
                             symbol = painterResource(element.symbolId),
-                            categoryButton = Color.Red,
+                            categoryButton = element.categoryButton,
                             onClick = { expression = element.onClickAction(expression) })
                     }
                 }
             }
         }
+        Spacer(modifier = Modifier.height(40.dp))
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     CalculatorTheme {

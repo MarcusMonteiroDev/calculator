@@ -18,6 +18,7 @@ val Light_Button_Operator = Color(0xFFD6E6FF)
 val Light_Button_Clear = Color(0xFFFFEADD)
 val Light_Button_Equals = Color(0xFF007BFF)
 
+
 // Tema Escuro
 val Dark_Background = Color(0xFF17181A)
 val Dark_Display = Color(0xFF101112)

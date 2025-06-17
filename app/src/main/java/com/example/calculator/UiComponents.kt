@@ -24,6 +24,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -75,28 +76,67 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.calculator.ui.theme.Dark_Button_Clear
+import com.example.calculator.ui.theme.Dark_Button_Equals
+import com.example.calculator.ui.theme.Dark_Button_Number
+import com.example.calculator.ui.theme.Dark_Button_Operator
+import com.example.calculator.ui.theme.Light_Button_Clear
+import com.example.calculator.ui.theme.Light_Button_Equals
+import com.example.calculator.ui.theme.Light_Button_Number
+import com.example.calculator.ui.theme.Light_Button_Operator
 
 @Composable
 fun Btn(
     modifier: Modifier = Modifier,
     symbol: Painter,
     contentDescription: String? = null,
-    categoryButton: Color,
+    categoryButton: ButtonCategory,
     onClick: () -> Unit
 ) {
+    // Verifica se o tema é claro ou escuro
+    val isDarkTheme = isSystemInDarkTheme()
 
+    // Cor do texto dos botões
+    val iconColor = when (isDarkTheme) {
+        true -> Light_Button_Number
+        false -> Dark_Button_Number
+    }
+
+    // Determina as cores dos componentes
+    val backgroundColor = if (!isDarkTheme) {
+        // Cores do tema claro
+        when (categoryButton) {
+            ButtonCategory.NUMBER -> Light_Button_Number
+            ButtonCategory.CLEAR -> Light_Button_Clear
+            ButtonCategory.EQUALS -> Light_Button_Equals
+            ButtonCategory.OPERATOR -> Light_Button_Operator
+            else -> Color.Black
+        }
+    }
+    else {
+        // Cores do tema escuro
+        when (categoryButton) {
+            ButtonCategory.NUMBER -> Dark_Button_Number
+            ButtonCategory.CLEAR -> Dark_Button_Clear
+            ButtonCategory.EQUALS -> Dark_Button_Equals
+            ButtonCategory.OPERATOR -> Dark_Button_Operator
+            else -> Color.Black
+        }
+    }
 
     // Essa Row vai funcionar como a parte clicável do botão, servindo apenas para a estilização
     // O Button em si não é estilizado pois não fornece amplas opções de estilização
     Box (
         modifier = modifier
             .clickable (onClick = onClick)
-            .padding(8.dp)
-            .background(categoryButton),
+            .background(
+                backgroundColor
+            ),
         contentAlignment = Alignment.Center
     ) {
         Icon (painter = symbol,
             contentDescription = contentDescription,
+            tint = iconColor
             )
     }
 }
