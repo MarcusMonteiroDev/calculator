@@ -2,14 +2,11 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="512"
-   height="512"
-   viewBox="0 0 135.46666 135.46667"
+   width="24"
+   height="24"
+   viewBox="0 0 6.3499999 6.35"
    version="1.1"
-   id="svg1852"
-   inkscape:export-filename="three.svg"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96"
+   id="svg5"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    sodipodi:docname="zero.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -17,7 +14,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
-     id="namedview1854"
+     id="namedview7"
      pagecolor="#ffffff"
      bordercolor="#000000"
      borderopacity="0.25"
@@ -27,47 +24,33 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.1253621"
-     inkscape:cx="266.13655"
-     inkscape:cy="259.91633"
+     inkscape:zoom="23.746577"
+     inkscape:cx="13.075569"
+     inkscape:cy="12.317565"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="0"
      inkscape:window-y="35"
      inkscape:window-maximized="1"
-     inkscape:current-layer="text9915" />
+     inkscape:current-layer="text646" />
   <defs
-     id="defs1849" />
+     id="defs2" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
     <g
-       aria-label="1"
-       id="text3068"
-       style="font-weight:bold;font-size:123.472px;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;stroke-width:0.264583">
+       aria-label="+/-"
+       id="text646"
+       style="font-weight:bold;font-size:3.52778px;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#1a1a1a;stroke-width:0.264583">
       <g
-         aria-label="2"
-         id="text9665"
-         style="stroke-width:0.0700042">
-        <g
-           aria-label="4"
-           id="text9852"
-           style="font-size:123.472px;stroke-width:0.0185219">
-          <g
-             aria-label="6"
-             id="text9915"
-             style="stroke-width:0.00490059">
-            <g
-               aria-label="0"
-               id="text10046"
-               style="font-size:123.472px;stroke-width:0.00129661">
-              <path
-                 d="m 98.539594,67.795069 q 0,14.19928 -3.0868,24.323984 -2.963328,10.124707 -9.754288,15.557467 -6.667488,5.43277 -18.026912,5.43277 -15.927888,0 -23.336208,-11.97678 -7.40832,-12.100257 -7.40832,-33.337441 0,-14.322752 2.963328,-24.447456 2.963328,-10.124704 9.754288,-15.557472 6.79096,-5.432768 18.026912,-5.432768 15.804416,0 23.336208,11.976784 7.531792,11.976784 7.531792,33.460912 z m -43.091728,0 q 0,15.063584 2.592912,22.718848 2.592912,7.531792 9.630816,7.531792 6.914432,0 9.630816,-7.531792 2.716384,-7.531792 2.716384,-22.718848 0,-15.063584 -2.716384,-22.718848 -2.716384,-7.655264 -9.630816,-7.655264 -7.037904,0 -9.630816,7.655264 -2.592912,7.655264 -2.592912,22.718848 z"
-                 id="path10048" />
-            </g>
-          </g>
-        </g>
+         aria-label="0"
+         id="text728"
+         style="font-size:6.35px;font-family:'AvantGarde LT Medium';-inkscape-font-specification:'AvantGarde LT Medium,  Bold';stroke-width:0.0700042">
+        <path
+           d="m 4.759325,3.1781751 q 0,0.73025 -0.15875,1.25095 -0.1524,0.5207 -0.50165,0.8001 -0.3429,0.2794 -0.9271,0.2794 -0.8191499,0 -1.2001499,-0.61595 -0.381,-0.6223 -0.381,-1.7145 0,-0.7366 0.1524,-1.2572999 0.1524,-0.5207 0.50165,-0.8001 0.34925,-0.27940003 0.9270999,-0.27940003 0.8128,0 1.20015,0.61595003 0.38735,0.61595 0.38735,1.7208499 z m -2.2161499,0 q 0,0.7747 0.13335,1.1684 0.1333499,0.38735 0.4952999,0.38735 0.3556,0 0.4953,-0.38735 0.1397,-0.38735 0.1397,-1.1684 0,-0.7747 -0.1397,-1.1683999 -0.1397,-0.3937 -0.4953,-0.3937 -0.36195,0 -0.4952999,0.3937 -0.13335,0.3936999 -0.13335,1.1683999 z"
+           style="font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold'"
+           id="path730" />
       </g>
     </g>
   </g>

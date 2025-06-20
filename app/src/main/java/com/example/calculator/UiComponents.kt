@@ -91,6 +91,7 @@ fun Btn(
     symbol: Painter,
     contentDescription: String? = null,
     categoryButton: ButtonCategory,
+    size: Float,
     onClick: () -> Unit
 ) {
     // Verifica se o tema é claro ou escuro
@@ -134,7 +135,8 @@ fun Btn(
             ),
         contentAlignment = Alignment.Center
     ) {
-        Icon (painter = symbol,
+        Icon (modifier = Modifier.fillMaxSize(fraction = size),
+            painter = symbol,
             contentDescription = contentDescription,
             tint = iconColor
             )

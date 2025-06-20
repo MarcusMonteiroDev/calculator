@@ -82,6 +82,7 @@ data class ButtonMold (
     val symbolId: Int,
     val contentDescription: String,
     val categoryButton: ButtonCategory,
+    val size: Float,
     val onClickAction: (String) -> String
 )
 
@@ -108,82 +109,81 @@ fun Display (modifier: Modifier = Modifier) {
     val baseButtonModifier: Modifier = Modifier
         .fillMaxSize()
         .padding(2.dp)
-        .clip(RoundedCornerShape(12.dp))
+        .clip(RoundedCornerShape(16.dp))
 
     // Lista de botões
     val buttons = listOf (
         listOf (
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ),
-        listOf (
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ),
-        listOf (
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.trig_asinh, "Inverse Hyperbolic Sine", ButtonCategory.NUMBER, 1.0f) {it + "asinh("},
+            ButtonMold (R.drawable.trig_acosh, "Inverse Hyperbolic Cosine", ButtonCategory.NUMBER, 1.0f) {it + "acosh("},
+            ButtonMold (R.drawable.trig_atanh, "Inverse Hyperbolic Tangent", ButtonCategory.NUMBER, 1.0f) {it + "atanh("},
+            ButtonMold (R.drawable.sym_c, "Clear", ButtonCategory.CLEAR, 0.7f) {""},
+            ButtonMold (R.drawable.sym_del, "Delete", ButtonCategory.CLEAR, 0.8f) {it.dropLast(1) },
         ),
         listOf (
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.trig_sinh, "Hyperbolic Sine", ButtonCategory.NUMBER, 1.0f) {it + "sinh("},
+            ButtonMold (R.drawable.trig_cosh, "Hyperbolic Cosine", ButtonCategory.NUMBER, 1.0f) {it + "cosh("},
+            ButtonMold (R.drawable.trig_tanh, "Hyperbolic Tangent", ButtonCategory.NUMBER, 1.0f) {it + "tanh("},
+            ButtonMold (R.drawable.sym_deg, "Angle Mode Toggle DEG", ButtonCategory.NUMBER, 0.7f) {it },
+            ButtonMold (R.drawable.sym_rad, "Angle Mode Toggle RAD", ButtonCategory.NUMBER, 0.7f) {it },
         ),
         listOf (
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.trig_asin, "Inverse Sine", ButtonCategory.NUMBER, 1.0f) {it + "asin("},
+            ButtonMold (R.drawable.trig_acos, "Inverse Cosine", ButtonCategory.NUMBER, 1.0f) {it + "acos("},
+            ButtonMold (R.drawable.trig_atan, "Inverse Tangent", ButtonCategory.NUMBER, 1.0f) {it + "atan("},
+            ButtonMold (R.drawable.opr_1_div_x, "Reciprocal", ButtonCategory.NUMBER, 0.8f) {it + "1/"},
+            ButtonMold (R.drawable.opr_n_factorial, "Factorial", ButtonCategory.NUMBER, 0.8f) {it + "factorial("},
         ),
         listOf (
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.trig_sin, "Sine", ButtonCategory.NUMBER, 0.8f) {it + "sin("},
+            ButtonMold (R.drawable.trig_cos, "Cosine", ButtonCategory.NUMBER, 0.8f) {it + "cos("},
+            ButtonMold (R.drawable.trig_tan, "Tangent", ButtonCategory.NUMBER, 0.8f) {it + "tan("},
+            ButtonMold (R.drawable.sym_pi, "Pi", ButtonCategory.NUMBER, 0.7f) {it + "pi"},
+            ButtonMold (R.drawable.sym_e, "Euler's Number", ButtonCategory.NUMBER, 0.7f) {it + "e"},
         ),
         listOf (
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.opr_log, "Logarithm base 10", ButtonCategory.NUMBER, 0.8f) {it + "log10("},
+            ButtonMold (R.drawable.opr_ln, "Natural Logarithm", ButtonCategory.NUMBER, 0.8f) {it + "log("},
+            ButtonMold (R.drawable.opr_10_pow_x, "10 to the Power of x", ButtonCategory.NUMBER, 0.8f) {it + "10^"},
+            ButtonMold (R.drawable.opr_e_pow_x, "e to the Power of x", ButtonCategory.NUMBER, 0.9f) {it + "exp("},
+            ButtonMold (R.drawable.opr_percentage, "Percent", ButtonCategory.NUMBER, 0.8f) {it + "percent("},
         ),
         listOf (
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.opr_x_pow_2, "Square", ButtonCategory.NUMBER, 0.75f) {it + "^2"},
+            ButtonMold (R.drawable.opr_x_pow_3, "Cube", ButtonCategory.NUMBER, 0.75f) {it + "^3"},
+            ButtonMold (R.drawable.opr_x_pow_y, "x to the Power of y", ButtonCategory.NUMBER, 0.75f) {it + "^"},
+            ButtonMold (R.drawable.opr_sqrt, "Square Root", ButtonCategory.NUMBER, 1.0f) {it + "sqrt("},
+            ButtonMold (R.drawable.opr_sqrt_y, "y-th Root of x", ButtonCategory.NUMBER, 0.9f) {it + "rootN("},
         ),
         listOf (
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.seven, "seven", ButtonCategory.NUMBER, 0.6f) {it + "7"},
+            ButtonMold (R.drawable.eight, "eight", ButtonCategory.NUMBER, 0.6f) {it + "8"},
+            ButtonMold (R.drawable.nine, "nine", ButtonCategory.NUMBER, 0.6f) {it + "9"},
+            ButtonMold (R.drawable.opr_divide, "division", ButtonCategory.OPERATOR, 0.8f) {it + "/"},
+            ButtonMold (R.drawable.sym_open, "open parentheses", ButtonCategory.NUMBER, 0.7f) {it + "("},
         ),
         listOf (
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
-            ButtonMold (R.drawable.test, "test", ButtonCategory.NUMBER) {it },
+            ButtonMold (R.drawable.four, "four", ButtonCategory.NUMBER, 0.6f) {it + "4"},
+            ButtonMold (R.drawable.five, "five", ButtonCategory.NUMBER, 0.6f) {it + "5"},
+            ButtonMold (R.drawable.six, "six", ButtonCategory.NUMBER, 0.6f) {it + "6"},
+            ButtonMold (R.drawable.opr_multiply, "multiplication", ButtonCategory.OPERATOR, 0.9f) {it + "*"},
+            ButtonMold (R.drawable.sym_close, "close parentheses", ButtonCategory.NUMBER, 0.7f) {it + ")"},
+        ),
+        listOf (
+            ButtonMold (R.drawable.one, "one", ButtonCategory.NUMBER, 0.6f) {it + "1"},
+            ButtonMold (R.drawable.two, "two", ButtonCategory.NUMBER, 0.6f) {it + "2"},
+            ButtonMold (R.drawable.trhee, "trhee", ButtonCategory.NUMBER, 0.6f) {it + "3"},
+            ButtonMold (R.drawable.opr_minus, "subtraction", ButtonCategory.OPERATOR, 0.8f) {it + "-"},
+            ButtonMold (R.drawable.symb_change_sign, "change sign", ButtonCategory.NUMBER, 1.0f) {it },
+        ),
+        listOf (
+            ButtonMold (R.drawable.zero, "zero", ButtonCategory.NUMBER, 0.6f) {it + "0"},
+            ButtonMold (R.drawable.opr_dot, "Decimal Point", ButtonCategory.NUMBER, 1.0f) {it + "."},
+            ButtonMold (R.drawable.sym_ans, "answer", ButtonCategory.NUMBER, 1.0f) {it },
+            ButtonMold (R.drawable.opr_plus, "addition", ButtonCategory.OPERATOR, 1.0f) {it + "+"},
+            ButtonMold (R.drawable.opr_equal, "equals", ButtonCategory.EQUALS, 0.8f) { calculate(it) },
         )
     )
-
 
     // Coluna principal de sustentaçao da UI
     Column  (modifier = Modifier
@@ -195,8 +195,8 @@ fun Display (modifier: Modifier = Modifier) {
         // Tela onde aparece os números da calculadora
         Box(
             modifier = Modifier
-                .border(5.dp, Color.Red)
-                .weight(0.2f)
+                //.border(5.dp, Color.Red)
+                .weight(0.15f)
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .background(backgroundColor),
@@ -204,7 +204,7 @@ fun Display (modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = expression,
-                style = MaterialTheme.typography.displayLarge,
+                style = MaterialTheme.typography.displayMedium,
                 maxLines = 1,
                 softWrap = false,
                 modifier = Modifier.horizontalScroll(scrollState),
@@ -231,6 +231,7 @@ fun Display (modifier: Modifier = Modifier) {
                                 .weight(0.1f),
                             symbol = painterResource(element.symbolId),
                             categoryButton = element.categoryButton,
+                            size = element.size,
                             onClick = { expression = element.onClickAction(expression) })
                     }
                 }
