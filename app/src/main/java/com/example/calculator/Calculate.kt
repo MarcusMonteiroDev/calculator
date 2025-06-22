@@ -10,13 +10,9 @@ import kotlin.math.sqrt
 
 
 fun main() {
-    /*
     val expression = "sinh(pi)"
     println (calculate(expression))
-    */
-     println (
-         ln (2.35)
-     )
+
 }
 
 fun calculate (expression: String): String {
