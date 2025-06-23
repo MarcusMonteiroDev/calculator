@@ -23,7 +23,7 @@ val buttons = listOf(
             contentDescription = "Inverse Hyperbolic Sine",
             categoryButton = ButtonCategory.NUMBER,
             size = 1.0f,
-            onClickAction = { it + "asinh(" }
+            onClickAction = { it + "sinh⁻¹(" }
         ),
         ButtonMold(
             symbolId = R.drawable.trig_acosh,
@@ -31,7 +31,7 @@ val buttons = listOf(
             contentDescription = "Inverse Hyperbolic Cosine",
             categoryButton = ButtonCategory.NUMBER,
             size = 1.0f,
-            onClickAction = { it + "acosh(" }
+            onClickAction = { it + "cosh⁻¹(" }
         ),
         ButtonMold(
             symbolId = R.drawable.trig_atanh,
@@ -39,7 +39,7 @@ val buttons = listOf(
             contentDescription = "Inverse Hyperbolic Tangent",
             categoryButton = ButtonCategory.NUMBER,
             size = 1.0f,
-            onClickAction = { it + "atanh(" }
+            onClickAction = { it + "tanh⁻¹(" }
         ),
         ButtonMold(
             symbolId = R.drawable.sym_c,
@@ -55,7 +55,7 @@ val buttons = listOf(
             contentDescription = "Delete",
             categoryButton = ButtonCategory.CLEAR,
             size = 0.8f,
-            onClickAction = { it.dropLast(1) }
+            onClickAction = { it.dropLast(10) }
         ),
     ),
     // Linha 2
@@ -109,7 +109,7 @@ val buttons = listOf(
             contentDescription = "Inverse Sine",
             categoryButton = ButtonCategory.NUMBER,
             size = 1.0f,
-            onClickAction = { it + "asin(" }
+            onClickAction = { it + "sin⁻¹(" }
         ),
         ButtonMold(
             symbolId = R.drawable.trig_acos,
@@ -117,7 +117,7 @@ val buttons = listOf(
             contentDescription = "Inverse Cosine",
             categoryButton = ButtonCategory.NUMBER,
             size = 1.0f,
-            onClickAction = { it + "acos(" }
+            onClickAction = { it + "cos⁻¹(" }
         ),
         ButtonMold(
             symbolId = R.drawable.trig_atan,
@@ -125,7 +125,7 @@ val buttons = listOf(
             contentDescription = "Inverse Tangent",
             categoryButton = ButtonCategory.NUMBER,
             size = 1.0f,
-            onClickAction = { it + "atan(" }
+            onClickAction = { it + "tan⁻¹(" }
         ),
         ButtonMold(
             symbolId = R.drawable.opr_1_div_x,
@@ -141,7 +141,7 @@ val buttons = listOf(
             contentDescription = "Factorial",
             categoryButton = ButtonCategory.NUMBER,
             size = 0.8f,
-            onClickAction = { it + "factorial(" }
+            onClickAction = { it + "!" }
         ),
     ),
     // Linha 4
@@ -176,7 +176,7 @@ val buttons = listOf(
             contentDescription = "Pi",
             categoryButton = ButtonCategory.NUMBER,
             size = 0.7f,
-            onClickAction = { it + "pi" }
+            onClickAction = { it + "π" }
         ),
         ButtonMold(
             symbolId = R.drawable.sym_e,
@@ -195,7 +195,7 @@ val buttons = listOf(
             contentDescription = "Logarithm Base 10",
             categoryButton = ButtonCategory.NUMBER,
             size = 0.8f,
-            onClickAction = { it + "log10(" }
+            onClickAction = { it + "log(" }
         ),
         ButtonMold(
             symbolId = R.drawable.opr_ln,
@@ -203,7 +203,7 @@ val buttons = listOf(
             contentDescription = "Natural Logarithm",
             categoryButton = ButtonCategory.NUMBER,
             size = 0.8f,
-            onClickAction = { it + "log(" }
+            onClickAction = { it + "ln(" }
         ),
         ButtonMold(
             symbolId = R.drawable.opr_10_pow_x,
@@ -219,7 +219,7 @@ val buttons = listOf(
             contentDescription = "e to the Power of x",
             categoryButton = ButtonCategory.NUMBER,
             size = 0.9f,
-            onClickAction = { it + "exp(" }
+            onClickAction = { it + "e^" }
         ),
         ButtonMold(
             symbolId = R.drawable.opr_percentage,
@@ -227,7 +227,7 @@ val buttons = listOf(
             contentDescription = "Percent",
             categoryButton = ButtonCategory.NUMBER,
             size = 0.8f,
-            onClickAction = { it + "percent(" }
+            onClickAction = { it + "%" }
         ),
     ),
     // Linha 6
@@ -262,7 +262,7 @@ val buttons = listOf(
             contentDescription = "Square Root",
             categoryButton = ButtonCategory.NUMBER,
             size = 1.0f,
-            onClickAction = { it + "sqrt(" }
+            onClickAction = { it + "√" }
         ),
         ButtonMold(
             symbolId = R.drawable.opr_sqrt_y,
@@ -348,7 +348,7 @@ val buttons = listOf(
             contentDescription = "Multiplication",
             categoryButton = ButtonCategory.OPERATOR,
             size = 0.9f,
-            onClickAction = { it + "*" }
+            onClickAction = { it + "x" }
         ),
         ButtonMold(
             symbolId = R.drawable.sym_close,
@@ -443,7 +443,7 @@ val buttons = listOf(
             contentDescription = "Equals",
             categoryButton = ButtonCategory.EQUALS,
             size = 0.8f,
-            onClickAction = { calculate(it) }
+            onClickAction = { formatExpression(it) }
         ),
     )
 )

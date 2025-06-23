@@ -78,7 +78,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun Display (modifier: Modifier = Modifier) {
     // Armazena a expressão matemática digitada
     var expressionScreen by remember { mutableStateOf("") }
-    var expressionBackEnd = remember { mutableListOf<String>() }
 
     // Controla o estado de rolagem do display de texto
     val scrollState = rememberScrollState()
@@ -147,7 +146,8 @@ fun Display (modifier: Modifier = Modifier) {
                             symbol = painterResource(element.symbolId),
                             categoryButton = element.categoryButton,
                             size = element.size,
-                            onClick = { expressionScreen = element.onClickAction(expressionScreen) })
+                            onClick = { expressionScreen = element.onClickAction(expressionScreen) }
+                        )
                     }
                 }
             }
