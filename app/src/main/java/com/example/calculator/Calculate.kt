@@ -7,137 +7,95 @@ import net.objecthunter.exp4j.function.Function
 import kotlin.math.pow
 import kotlin.math.ln
 import kotlin.math.sqrt
-
-
+// -------------------------------------------------------------------------------------------
+// Função main() usada para testes
 fun main() {
-    val expression = "5%*20"
+    val expression = "2! + 3! - 20 * 3%"
     val a = "esse é um teste"
     println (formatExpression(expression))
 
 }
+// -------------------------------------------------------------------------------------------
+// Funções utilitárias para conversão ou cálculo:
 
 // Converte a expressão na tela para uma expressão matemática válida para ser calculada
 fun formatExpression (expression: String): String {
+    // Substitui os elementos escritos na tela por operações que o exp4j entende
     var expressionFormated = expression
-    val specialOperatorsList = listOf <String> (
-        "sinh⁻¹(",
-        "cosh⁻¹(",
-        "tanh⁻¹(",
-        "sin⁻¹(",
-        "cos⁻¹(",
-        "tan⁻¹(",
-        "!",
-        "π",
-        "log(",
-        "ln(",
-        "%"
-    )
-    val numbers = listOf <String> ("0","1","2","3","4","5","6","7","8","9")
-    val operations = listOf ('+', '-', '*', '/')
-
-    expressionFormated = expression
         .replace("sinh⁻¹(", "asinh(")
         .replace("cosh⁻¹(", "acosh")
         .replace("tanh⁻¹(", "atanh(")
         .replace("sin⁻¹(", "asin(")
         .replace("cos⁻¹(", "acos(")
         .replace("tan⁻¹(", "atan(")
-        //.replace("!", "factorial(")   // ATENÇÃO
         .replace("π", "pi")
         .replace("log(", "log10(")
         .replace("ln(", "log(")
-        //.replace("%", "percent(")   // ATENÇÃO
         .replace("x", "*")
 
+    // Caso especial para o fatorial de um número
     if ("!" in expressionFormated) {
-        expressionFormated = substituteFactorial (expressionFormated)
+        // Chama a função que subistitui o valor de forma adequada
+        expressionFormated = substitute (expression = expressionFormated,
+            oldValue = "!",
+            newValue = "factorial(")
     }
+    // Caso especial para a porcentagem de um número
     if ("%" in expressionFormated) {
-        expressionFormated = substitutePercent(expressionFormated)
+        // Chama a função que subistitui o valor de forma adequada
+        expressionFormated = substitute (expression = expressionFormated,
+            oldValue = "%",
+            newValue = "percent(")
     }
-
+    // Chama a função de cálculo e retorna o resultado da expressão devidamente convertida
     return calculate(expressionFormated)
 }
 
-/*
-1 - Localizar a ocorrência do !
-2 - Verificar qual o número no qual o ! está associado
-3 - Apagar o ! e colocar o factorial( no início do número e fechar com um )
- */
-fun substitutePercent (expression: String): String {
-    val numbers = listOf <String> ("0","1","2","3","4","5","6","7","8","9")
-    val operations = listOf ("+", "-", "*", "/","")
-
+// Função usada para subistituir o "!" e o "%" para expressões que possam ser usadas no cálculo
+// dentro do calculate(). Essa função funciona com a seguinte lógica:
+// 1 - Localizar a ocorrência do elemento
+// 2 - Verificar qual o número no qual o elemento está associado
+// 3 - Apagar o elemento e colocar o a função correspondente no início do número e fechar com um )
+fun substitute (expression: String, oldValue: String, newValue: String): String {
+    // Lista de operações usada para saber quando o número no qual a operação está sendo feita acaba
+    val operations = listOf ("+", "-", "*", "/",)
+    // Recebe o valor da expressão
     var exp = expression
-    val quantidade = exp.count {it == '%'}
 
-    println ("Quantidade de ocorrências -> $quantidade\n--------------")
-
-    for (i in 1..quantidade) {
-
-        val id = exp.indexOf('%')
-
+    // Laço que percorre a expressão até que todas as ocorrências do elemento a ser substituido
+    // terminem
+    while (oldValue in exp) {
+        // Pega o index do elemento procurado
+        val id = exp.indexOf(oldValue)
+        // Percorre a string em sentido contrário a partir do elemento encontrado
         for (u in (id downTo 0)) {
+            // Verifica se o número associado ao elemento terminou (os números terminam com
+            // operações antes dele ou com um espaço vazio caso ele seja o primeiro número da tela)
             if (exp[u].toString() in operations) {
                 val parte1 = exp.substring(0, u+1)
                 val parte2 = exp.substring(u+1)
-                exp = parte1 + "percent(" + parte2
+                exp = parte1 + newValue + parte2
                 break
             }
             if (u == 0) {
-                exp = "percent(" + exp
+                exp = newValue + exp
                 break
             }
         }
-
-        exp = exp.replaceFirst("%",")")
+        // Após a substituição ser feita, modifica a primeira ocorrência do elemento buscado para
+        // um parênteses que fecha a função posicionada anteriormente
+        exp = exp.replaceFirst(oldValue,")")
     }
-
-    println ("Expressão -> $exp")
-    println("--------------------")
-
+    // Retorna a expressão devidamente formatada
     return exp
 }
-
-fun substituteFactorial (expression: String): String {
-    val numbers = listOf <String> ("0","1","2","3","4","5","6","7","8","9")
-    val operations = listOf ("+", "-", "*", "/","")
-
-    var exp = expression
-    val quantidade = exp.count {it == '!'}
-
-    println ("Quantidade de ocorrências -> $quantidade\n--------------")
-
-    for (i in 1..quantidade) {
-
-        val id = exp.indexOf('!')
-
-        for (u in (id downTo 0)) {
-            if (exp[u].toString() in operations) {
-                val parte1 = exp.substring(0, u+1)
-                val parte2 = exp.substring(u+1)
-                exp = parte1 + "factorial(" + parte2
-                break
-            }
-            if (u == 0) {
-                exp = "factorial(" + exp
-                break
-            }
-        }
-
-        exp = exp.replaceFirst("!",")")
-    }
-
-    println ("Expressão -> $exp")
-    println("--------------------")
-
-    return exp
-}
-
 
 // Calcula a expressão matemática
 fun calculate (expression: String): String {
+    // Verifica se a expressão é válida
     try {
+        // Declara as funções especiais que calculam operações que não estão disponíveis
+        // na biblioteca exp4j por padrão
         val builder = ExpressionBuilder(expression)
             .function(atanh)
             .function(acosh)
@@ -146,9 +104,12 @@ fun calculate (expression: String): String {
             .function(rootN)
             .function(factorial)
 
+        // Calcula a expressão usando a biblioteca exp4j
         val result = builder.build().evaluate()
+        // Retorna o resultado convertido para string
         return result.toString()
     }
+    // Caso a expressão não seja válida, retorna um erro
     catch (e: Exception) {
         return "Error"
     }
@@ -163,6 +124,8 @@ fun formatResult (number: Double): String {
 
     return result.toString()
 }
+// -------------------------------------------------------------------------------------------
+// Funções extras para o cálculo de expressoes que não estão presentes no exp4j:
 
 // Função que calcula o fatorial de um número
 val factorial = object: Function ("factorial", 1) {
@@ -233,3 +196,4 @@ val atanh = object: Function ("atanh", 1) {
         return result
     }
 }
+// -------------------------------------------------------------------------------------------
