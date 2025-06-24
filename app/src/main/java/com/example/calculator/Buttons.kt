@@ -55,7 +55,7 @@ val buttons = listOf(
             contentDescription = "Delete",
             categoryButton = ButtonCategory.CLEAR,
             size = 0.8f,
-            onClickAction = { it.dropLast(10) }
+            onClickAction = { delete(it) }
         ),
     ),
     // Linha 2

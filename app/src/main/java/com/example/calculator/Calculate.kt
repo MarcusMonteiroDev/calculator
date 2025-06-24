@@ -10,10 +10,11 @@ import kotlin.math.sqrt
 // -------------------------------------------------------------------------------------------
 // Função main() usada para testes
 fun main() {
-    val expression = "2! + 3! - 20 * 3%"
-    val a = "esse é um teste"
-    println (formatExpression(expression))
+    val exp ="cosh⁻¹("
+    println(exp.length)
+    println ("Últimos caracteres -> ${exp.takeLast(2)}")
 
+    delete(exp)
 }
 // -------------------------------------------------------------------------------------------
 // Funções utilitárias para conversão ou cálculo:
@@ -123,6 +124,67 @@ fun formatResult (number: Double): String {
         .stripTrailingZeros()
 
     return result.toString()
+}
+
+// Função que deleta termos escritos na expressão
+fun delete (expression: String): String {
+
+    val numbers = listOf('0','1','2','3','4','5','6','7','8','9')
+    val operations_4 = listOf(
+        "sin(",
+        "cos(",
+        "tan(",
+        "log(",
+    )
+    val operations_5 = listOf (
+        "sinh(",
+        "cosh(",
+        "tanh(",
+    )
+    val operations_6 = listOf (
+        "sin⁻¹(",
+        "cos⁻¹(",
+        "tan⁻¹(",
+    )
+    val operations_7 = listOf (
+        "sinh⁻¹(",
+        "cosh⁻¹(",
+        "tanh⁻¹("
+    )
+
+    var exp = expression
+    val last = exp.lastOrNull()
+
+    if (last == null) {
+        exp = ""
+    }
+    else {
+        if (last == '(' ) {
+            if (exp.takeLast(3) == "ln(") {
+                exp = exp.dropLast(3)
+            }
+            else if (exp.takeLast(4) in operations_4) {
+                exp = exp.dropLast(4)
+            }
+            else if (exp.takeLast(5) in operations_5) {
+                exp = exp.dropLast(5)
+            }
+            else if (exp.takeLast(6) in operations_6) {
+                exp = exp.dropLast(6)
+            }
+            else if (exp.takeLast(7) in operations_7) {
+                exp = exp.dropLast(7)
+            }
+            else {
+                exp = exp.dropLast(1)
+            }
+        }
+        else {
+            exp = exp.dropLast(1)
+        }
+    }
+
+    return exp
 }
 // -------------------------------------------------------------------------------------------
 // Funções extras para o cálculo de expressoes que não estão presentes no exp4j:
